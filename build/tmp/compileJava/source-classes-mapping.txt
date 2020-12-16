@@ -1,0 +1,6 @@
+com/shutl/Application.java
+ com.shutl.Application
+com/shutl/model/Quote.java
+ com.shutl.model.Quote
+com/shutl/controller/QuoteController.java
+ com.shutl.controller.QuoteController

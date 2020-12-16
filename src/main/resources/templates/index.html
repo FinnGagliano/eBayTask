@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Delivery Quotes</title>
+    <script type="text/javascript">
+
+      function get_quote(delivery, pickup, vehicle) {
+        var data = {"pickupPostcode": pickup, "deliveryPostcode": delivery, "vehicle": vehicle}
+        const Http = new XMLHttpRequest();
+        const url='http://localhost:8080/quote';
+        Http.open("POST", url);
+        Http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        Http.send(JSON.stringify(data));
+        console.log(data);
+        console.log("Hello");
+        Http.onreadystatechange = function() {
+          // Doing this awkward nested-if because XML treats the 'and' symbol as an escape
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              let response = JSON.parse(Http.responseText);
+              document.querySelector("#result").innerHTML = "A delivery from " + response.pickupPostcode + " to " + response.deliveryPostcode + " using a " + response.vehicle + " will cost you £" + response.price;
+            } else {
+              document.querySelector("#result").innerHTML = "Loading...";
+            }
+          } else {
+            document.querySelector("#result").innerHTML = "Loading...";
+          }
+        }
+
+      }
+
+    </script>
+</head>
+<body>
+  <h1>Delivery Quotes</h1>
+  <p>Fill out the form and we'll give you a quote for delivery!</p>
+  <form>
+    <label for="deliveryPostcode">delivery_postcode:</label>
+    <input type="text" id="deliveryPostcode" name="deliveryPostcode"></input><br></br>
+    <label for="pickupPostcode">pickup_postcode:</label>
+    <input type="text" id="pickupPostcode" name="pickupPostcode"></input><br></br>
+    <label for="vehicle">vehicle:</label>
+    <input type="text" id="vehicle" name='vehicle'></input><br></br>
+    <input type="button" value="Get Quote" onclick="javascript:get_quote(deliveryPostcode.value, pickupPostcode.value, vehicle.value)"></input>
+  </form>
+
+  <p id="result"></p>
+</body>
+</html>
