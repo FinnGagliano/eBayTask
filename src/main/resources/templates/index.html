@@ -12,8 +12,7 @@
         Http.open("POST", url);
         Http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         Http.send(JSON.stringify(data));
-        console.log(data);
-        console.log("Hello");
+        
         Http.onreadystatechange = function() {
           // Doing this awkward nested-if because XML treats the 'and' symbol as an escape
           if (this.readyState == 4) {

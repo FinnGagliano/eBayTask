@@ -21,8 +21,8 @@ An adjustment I made to the original tests was adding in the vehicle type and an
 appropriately adjusted price.
 
 I have also added some additional tests:
-> If two identical postcodes are given, the delivery cost is £0
-> If the vehicle provided doesn't match the defined vehicles then no markup is
+- If two identical postcodes are given, the delivery cost is £0
+- If the vehicle provided doesn't match the defined vehicles then no markup is
 added
 
 
